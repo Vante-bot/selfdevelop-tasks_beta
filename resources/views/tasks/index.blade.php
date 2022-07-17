@@ -42,29 +42,24 @@
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample"> -->
                         <div class="card-body">{{$sub->subtasks}}</div>
                         @endforeach
-
                     </div>
                     </div>  
 
                        
                 </div>     
-                       
-                
-                         
-
-                         
+                                 
                     </td>
  
                     <!--: 削除ボタン -->
-                    <!-- <td>
+                    <td>
                         
                         <form action="{{url('task/')}}" method="POST">
                         {{csrf_field()}}
                         {{method_field('DELETE')}}
 
-                        <button type="submit" id="delete-task-{{$task}}"></button>
+                        <button type="submit" id="delete-task-{{$task}}">削除する</button>
                         </form>
-                    </td> -->
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

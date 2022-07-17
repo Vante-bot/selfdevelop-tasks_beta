@@ -6,6 +6,11 @@ use App\Models\subtask;
 use Illuminate\Http\Request;
  
 use App\Models\Task;
+use App\Http\Requests\TaskRequest;
+use Illuminate\Support\Facades\DB;
+
+use App\Http\Controllers\Exception;
+
  
 class TaskController extends Controller
 {
@@ -28,42 +33,66 @@ class TaskController extends Controller
 
         return view('tasks.index', [ //Tasksフォルダ内のindexファイルを利用するという意味。//
             
-            'tasks' => $tasks,  //hasManyモデルをかく方法を明日質問する
-            
+            'tasks' => $tasks,  
         ]);
     }
 
-    // public function store(Request $request){
-    //     $this ->validate($request,['name'=>'required|max:255',]);
-    // }
-
-
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'task' => 'required|max:255',
-        ]);
-      
-        
-       
-    }
     
   /**createManyメソッドを利用してsubtasksを複数追加できる機能を追加する */
+
+ /**タスクとサブタスクをまとめて登録するよりは一度タスク登録ページを作成してから
+  *ホーム画面に一度戻り、そのタスクから登録されたタスクに紐づく形でサブタスクに遷移するページをが作業しやすい 
+  */
+
 
 public function create(request $request){
 
     return view('tasks.create');
-
-
-    // タスク作成
-    //  Task::create([
-    //     'user_id' => 0,
-    //     'task' => $request->task
-    // ]);
+    // タスク作成ページへ移項
      
-    
-
 }
+
+public function store(Request $request) {
+  
+        // $this->validate($request, [
+        //     'task' => 'required|max:255',
+        // ]);
+      
+        DB::beginTransaction();
+       
+        try{
+            $task =new task($request->get('task',[
+
+             'task'=>$request->task,
+             'subtasks'=>$request->subtasks,
+            //  'user_id'=>   
+
+            ]));
+
+            $task->save();	
+
+            $tasks = $request->all(); //@
+
+            foreach($tasks[`task`] as $task){
+                foreach($task as $key=>$value)
+                $data = [
+                    'task' => $value,
+                    'task_id' => $task->id,
+                ];
+		
+                $task = Task::insert($data);
+            }
+
+            
+        }catch(Exception $e){ // ⑥
+            DB::rollback();
+            return back()->withInput();
+        }
+        DB::commit();
+        return redirect(route('tasks.index'));
+        
+}
+
 
     /**
         * タスク削除
@@ -72,7 +101,7 @@ public function create(request $request){
         * @param Task $task
         * @return Response
         */
-    public function destroy(Request $request, Task $task)
+public function destroy(Request $request, Task $task)
     {
         $task->delete();
         return redirect('/tasks');

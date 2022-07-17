@@ -12,7 +12,7 @@
 </head>
 <body>
 <h1>新規登録</h1>
-<form action="" method="post">
+<form action="{{ url('tasks/create') }}" method="post">
 @csrf
 <div>
     <label for="task-name">タスク名</label>
@@ -20,9 +20,20 @@
 </div>
    
 <div>
-    <label for="">サブタスク名</label>
+    <label for="">サブタスク1</label>
     <input type="text" name="subtasks" id="form-name">
 </div>
+
+<div>
+    <label for="">サブタスク2</label>
+    <input type="text" name="subtasks" id="form-name">
+</div>
+
+<div>
+    <label for="">サブタスク3</label>
+    <input type="text" name="subtasks" id="form-name">
+</div>
+
 
 <button type="submit">登録</button>
 </form>
