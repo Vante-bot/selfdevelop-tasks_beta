@@ -28,8 +28,8 @@ class TaskController extends Controller
         // dd(subtask::find(1));
         // dd(task::find(2)->task);
 
-        // $data = task::all();
-        //  dd($tasks);
+        $data = task::all();
+         dd($tasks);
 
         return view('tasks.index', [ //Tasksフォルダ内のindexファイルを利用するという意味。//
             
@@ -63,9 +63,10 @@ public function store(Request $request) {
         try{
             $task =new task($request->get('task',[
 
+
+
              'task'=>$request->task,
-             'subtasks'=>$request->subtasks,
-            //  'user_id'=>   
+                         //  'user_id'=>   
 
             ]));
 
