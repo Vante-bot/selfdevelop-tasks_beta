@@ -9,7 +9,7 @@ class subtask extends Model
 {
     use HasFactory;
     
-    public function subtasks(){
+    public function task(){
          return $this ->belongsTo(subtask::class);
     }
 }

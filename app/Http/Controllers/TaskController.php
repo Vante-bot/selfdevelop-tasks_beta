@@ -6,7 +6,7 @@ use App\Models\subtask;
 use Illuminate\Http\Request;
  
 use App\Models\Task;
-use App\Http\Requests\TaskRequest;
+// use App\Http\Requests\TaskRequest;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Exception;
@@ -29,7 +29,7 @@ class TaskController extends Controller
         // dd(task::find(2)->task);
 
         $data = task::all();
-         dd($tasks);
+        //  dd($tasks);
 
         return view('tasks.index', [ //Tasksフォルダ内のindexファイルを利用するという意味。//
             
@@ -57,31 +57,28 @@ public function store(Request $request) {
         // $this->validate($request, [
         //     'task' => 'required|max:255',
         // ]);
+    //   dd($request->subtasks);
       
         DB::beginTransaction();
        
         try{
-            $task =new task($request->get('task',[
-
-
+            $task =new Task([
 
              'task'=>$request->task,
-                         //  'user_id'=>   
+             'user_id'=>1,
 
-            ]));
+            ]);
 
-            $task->save();	
+            $task->save();	//idは振られているはず
 
-            $tasks = $request->all(); //@
-
-            foreach($tasks[`task`] as $task){
-                foreach($task as $key=>$value)
+            foreach($request->subtasks as $subtask){
                 $data = [
-                    'task' => $value,
+                    'subtasks' => $subtask,
                     'task_id' => $task->id,
+                    'user_id'=>1,
                 ];
 		
-                $task = Task::insert($data);
+                SubTask::insert($data);
             }
 
             
@@ -90,7 +87,7 @@ public function store(Request $request) {
             return back()->withInput();
         }
         DB::commit();
-        return redirect(route('tasks.index'));
+        return redirect(route('tasks'));
         
 }
 

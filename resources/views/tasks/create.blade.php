@@ -21,17 +21,17 @@
    
 <div>
     <label for="">サブタスク1</label>
-    <input type="text" name="subtasks" id="form-name">
+    <input type="text" name="subtasks[]" id="form-name">
 </div>
 
 <div>
     <label for="">サブタスク2</label>
-    <input type="text" name="subtasks" id="form-name">
+    <input type="text" name="subtasks[]" id="form-name">
 </div>
 
 <div>
     <label for="">サブタスク3</label>
-    <input type="text" name="subtasks" id="form-name">
+    <input type="text" name="subtasks[]" id="form-name">
 </div>
 
 

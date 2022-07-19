@@ -17,7 +17,7 @@ class Task extends Model
         
         }
 
-    protected $fillable = ['user_id','Task'];     
+    protected $fillable = ['user_id','task'];     
 }
 
 
