@@ -37,8 +37,6 @@ class TaskController extends Controller
         ]);
     }
 
-    
-  /**createManyメソッドを利用してsubtasksを複数追加できる機能を追加する */
 
  /**タスクとサブタスクをまとめて登録するよりは一度タスク登録ページを作成してから
   *ホーム画面に一度戻り、そのタスクから登録されたタスクに紐づく形でサブタスクに遷移するページをが作業しやすい 
@@ -51,7 +49,6 @@ public function create(request $request){
     // タスク作成ページへ移項
      
 }
-
 public function store(Request $request) {
   
         // $this->validate($request, [

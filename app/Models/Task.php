@@ -18,7 +18,15 @@ class Task extends Model
         }
 
     protected $fillable = ['user_id','task'];     
+
+    public static function boot(){
+    parent::boot();
+    static::deleting(function($task){
+    // foreach($task->$subtasks()->get() as $subtask){
+        $task->subtasks()->delete();
+    });
+     
 }
 
 
-
+}
