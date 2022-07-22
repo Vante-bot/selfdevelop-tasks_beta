@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/tasks',[\App\Http\Controllers\TaskController::class,'index'])->name('tasks');
+Route::get('/tasks/create',[\App\Http\Controllers\TaskController::class,'create'])->name('create');//ルーティングの変
+// Route::post('/tasks/create',[\App\Http\Controllers\TaskController::class,'create'])->name('create');//ルーティングの変更
+Route::post('/tasks/create',[\App\Http\Controllers\TaskController::class,'store'])->name('store');
+Route::delete('/task/{task}',[\App\Http\Controllers\TaskController::class,'destroy'])->name('/task/{task}');
