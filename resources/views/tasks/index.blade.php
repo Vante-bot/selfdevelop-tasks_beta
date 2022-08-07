@@ -6,7 +6,7 @@
 @if (count($tasks) > 0)
 <div class="panel panel-default">
     <div class="panel-heading">
-        Current Tasks
+        Tasks_Beta -ver.1.0
     </div>
  
    <a href="/tasks/create">新規登録</a>
@@ -16,7 +16,7 @@
  
             <!-- テーブルヘッダ -->
             <thead>
-                <th>Task</th>
+                <th>タスク一覧</th>
                 <th>&nbsp;</th>
             </thead>
  
@@ -28,18 +28,18 @@
                     <!-- タスク名 -->
                     <td class="table-text">
                         <div>{{ $task->task }}</div>
-                
+                        サブタスク一覧 
                         @foreach ( $task->subtasks as $sub)
                 
-                <!--bootstrapでのプルダウン機能-->        
-                <!-- <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
+                       
+                 <div class="accordion" id="accordionExample">
+                    <div class="accordion-item"> 
                     <h2 class="accordion-header" id="flush-headingOne">
-                    <button type="button" class="btn btn-light btn-block text-left p-3 rounded-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> -->
-                        <!-- サブタスク一覧
+                    <button type="button" class="btn btn-light btn-block text-left p-3 rounded-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> 
+                
                         </button>  
                     </h2>
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample"> -->
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                         <div class="card-body">{{$sub->subtasks}}</div>
                         @endforeach
                     </div>
