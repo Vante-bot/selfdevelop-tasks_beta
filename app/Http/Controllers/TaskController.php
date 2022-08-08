@@ -20,14 +20,20 @@ class TaskController extends Controller
         * @param Request $request
         * @return Response
         */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index(Request $request)
     {
-        $tasks = Task::orderBy('created_at', 'asc')->get();
+        $tasks =$request->user()->tasks()->get();    
+        // $tasks = Task::orderBy('created_at', 'asc')->get();
         // $tasks = Task::all()->with('subtasks');
         // dd($tasks);//ddの中身を表示して処理が中止される
-        // dd(subtask::find(1));
-        // dd(task::find(2)->task);
-
+        
         $data = task::all();
         //  dd($tasks);
 
@@ -36,12 +42,6 @@ class TaskController extends Controller
             'tasks' => $tasks,  
         ]);
     }
-
-
- /**タスクとサブタスクをまとめて登録するよりは一度タスク登録ページを作成してから
-  *ホーム画面に一度戻り、そのタスクから登録されたタスクに紐づく形でサブタスクに遷移するページをが作業しやすい 
-  */
-
 
 public function create(request $request){
 
@@ -55,6 +55,9 @@ public function store(Request $request) {
         //     'task' => 'required|max:255',
         // ]);
     //   dd($request->subtasks);
+
+
+
       
         DB::beginTransaction();
        
@@ -62,7 +65,7 @@ public function store(Request $request) {
             $task =new Task([
 
              'task'=>$request->task,
-             'user_id'=>1,
+             'user_id'=>1,//ここをログイン時にはどうするか聞く
 
             ]);
 
@@ -98,6 +101,7 @@ public function store(Request $request) {
         */
 public function destroy(Request $request, Task $task)
     {
+        $this->authorize('destory',$task);
         $task->delete();
         return redirect('/tasks');
     }

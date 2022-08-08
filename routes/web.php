@@ -22,3 +22,6 @@ Route::get('/tasks/create',[\App\Http\Controllers\TaskController::class,'create'
 // Route::post('/tasks/create',[\App\Http\Controllers\TaskController::class,'create'])->name('create');//ルーティングの変更
 Route::post('/tasks/create',[\App\Http\Controllers\TaskController::class,'store'])->name('store');
 Route::delete('/task/{task}',[\App\Http\Controllers\TaskController::class,'destroy'])->name('/task/{task}');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
