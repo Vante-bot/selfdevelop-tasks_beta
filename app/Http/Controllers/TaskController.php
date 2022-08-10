@@ -57,25 +57,24 @@ public function store(Request $request) {
     //   dd($request->subtasks);
 
 
-
-      
-        DB::beginTransaction();
+      DB::beginTransaction();
        
         try{
             $task =new Task([
 
              'task'=>$request->task,
-             'user_id'=>1,//ここをログイン時にはどうするか聞く
+            //  'user_id'=>$request->user_id
+            //  'user_id'=>1,
 
             ]);
-
+            $task->user_id = $request->user()->id;
             $task->save();	//idは振られているはず
 
             foreach($request->subtasks as $subtask){
                 $data = [
                     'subtasks' => $subtask,
                     'task_id' => $task->id,
-                    'user_id'=>1,
+                    'user_id'=>$task->user_id,
                 ];
 		
                 SubTask::insert($data);
