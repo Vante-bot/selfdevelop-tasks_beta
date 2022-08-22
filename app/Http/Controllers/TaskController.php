@@ -34,7 +34,7 @@ class TaskController extends Controller
         // $tasks = Task::all()->with('subtasks');
         // dd($tasks);//ddの中身を表示して処理が中止される
         
-        $data = task::all();
+        // $data = task::all();
         //  dd($tasks);
 
         return view('tasks.index', [ //Tasksフォルダ内のindexファイルを利用するという意味。//

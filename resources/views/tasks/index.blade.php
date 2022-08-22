@@ -3,7 +3,7 @@
 @section('content')
  
 <!-- タスク一覧表示 -->
-@if (count($tasks) > 0)
+<!-- @if (count($tasks) > 0) -->
 <div class="panel panel-default">
     <div class="panel-heading">
         Tasks_Beta -ver.1.0
