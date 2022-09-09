@@ -3,13 +3,15 @@
 @section('content')
  
 <!-- タスク一覧表示 -->
-<!-- @if (count($tasks) > 0) -->
+<a href="/tasks/create">新規登録</a>
+
+
+@if (count($tasks) > 0)
 <div class="panel panel-default">
     <div class="panel-heading">
         Tasks_Beta -ver.1.0
     </div>
  
-   <a href="/tasks/create">新規登録</a>
 
     <div class="panel-body">
         <table class="table table-striped task-table">
@@ -66,5 +68,5 @@
         </table>
     </div>
 </div>
-<!-- @endif -->
+@endif
 @endsection
